@@ -10,5 +10,5 @@ sudo apt upgrade -y
 # see the changes to your bashrc
 source ~/.bashrc
 
-figlet "Your 1337 H4KS0RZ enviroment has been initialized!" | lolcat
+figlet "Your 1337 H4X0R enviroment has been initialized!" | lolcat
 
