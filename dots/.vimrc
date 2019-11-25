@@ -1,0 +1,114 @@
+"------------------------------------------------------------------------------
+"	File: .vimrc
+"	Author: Ian M. Hoffman
+"	Date: 11 November 2019
+"	Github: https://github.com/IanMHoffman
+"------------------------------------------------------------------------------
+
+if 0 | endif
+
+if &compatible
+	set nocompatible "Be improved
+endif
+
+syntax on "Enable Syntax Processing
+
+"Allows for writing to files with root priviledges
+cmap w!! w !sudo tee %
+
+set encoding=utf-8
+
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+"------------------------------------------------------------------------------
+"	Dein The Dark Powered Vim/Neovim Plugin Manager
+"	Github: https://github.com/Shougo/dein.vim
+"------------------------------------------------------------------------------
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  call dein#add('Shougo/defx.nvim')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('w0rp/ale')
+  call dein#add('autozimu/LanguageClient-neovim', {
+      \ 'rev': 'next',
+      \ 'build': 'bash install.sh',
+      \ })
+  call dein#add('Shougo/vimproc')
+  call dein#add('Shougo/context_filetype.vim')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
+  call dein#add('morhetz/gruvbox')
+  call dein#add('spolu/dwm.vim')
+  call dein#add('bling/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('osyo-manga/vim-anzu')
+  call dein#add('lervag/vimtex')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('deton/jasegment.vim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"------------------------------------------------------------------------------
+"	Tabs & Spacing
+"------------------------------------------------------------------------------
+filetype plugin indent on "Load filetype specific indent files
+set tabstop = 4 "Number of visual spaces per 'Tab'
+set softtabstop = 4 "Number of spaces in 'Tab' when editing
+set expandtab "Tabs are spaces
+
+"------------------------------------------------------------------------------
+"	User Interface Configuration
+"------------------------------------------------------------------------------
+set number "Show line numbers
+set showcmd "show command in bottom bar
+filetype indent on "Load Filetype-Specific Indent Files
+set wildmenu "Visual autocomplete of the Command
+set lazyredraw "Reduce redrawing, fixes slow scrolling bug in ubuntu
+set showmatch "highlight matching for: [{()}]
+
+"------------------------------------------------------------------------------
+"	Searching
+"------------------------------------------------------------------------------
+set incsearch "search as characters are entered
+set hlsearch "highlight matches
+
+"------------------------------------------------------------------------------
+"	Folding
+"------------------------------------------------------------------------------
+set foldenable "enable folding in vim
+set foldlevelstart = 10 "opens most folds by default, adjust as needed
+set foldlevelstart = 10 "Maxinum of 10 nested folds, adjust as needed
+set foldmethod = indent "fold based on indent level, adjust by preference
+"Space opens and closes folds
+nnoremap <space> za
+
+"------------------------------------------------------------------------------
+"	 Runtime Path Settings
+"	---------------------------------------------------------------------------
+set runtimepath+=~/.vim/custom
+runtime! custom/vimrc/*.vim
+runtime! custom/vimrc/*.nvim
+runtime! custom/vimrc/plugin/*.vim
+runtime! custom/vimrc/plugin/*.nvim
+runtime! custom/vimrc/plugin/keybind/*.vim
+runtime! custom/vimrc/plugin/keybind/*.nvim
+
